@@ -1,0 +1,4 @@
+window.addEventListener('load',()=>setTimeout(()=>document.querySelector('.loader').classList.add('hide'),550));
+const menu=document.querySelector('.menu'), links=document.querySelector('.links');menu.addEventListener('click',()=>links.classList.toggle('open'));links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>links.classList.remove('open')));
+const io=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')}),{threshold:.14});document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+const stats=document.querySelectorAll('[data-count]');let done=false;const countIO=new IntersectionObserver(entries=>{if(entries[0].isIntersecting&&!done){done=true;stats.forEach(el=>{let target=+el.dataset.count, n=0, step=Math.ceil(target/50);let t=setInterval(()=>{n+=step;if(n>=target){n=target;clearInterval(t)}el.textContent=n+'+'},28)})}}, {threshold:.35});countIO.observe(document.querySelector('.stats'));
